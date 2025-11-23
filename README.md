@@ -75,41 +75,44 @@
    long, complex interactions.
 
 
-# How an LLM Processes a Request — Agent Developer Perspective
+# Describe how an LLM processes a request from an agent developer's perspective
 
-## 1. Agent builds a structured prompt
-The agent compiles system instructions, developer rules, memory,
-tool outputs, and the user's query into one text prompt.
+1. **Agent constructs the full prompt**  
+   The agent combines system instructions, developer rules, memory,
+   tool outputs, and the user query into one structured input block.
 
-## 2. LLM tokenizes the input
-Text is converted into tokens so the model can process it
-through its attention layers.
+2. **Prompt is tokenized into numeric vectors**  
+   The LLM converts the text into tokens so its transformer layers can
+   analyze relationships and patterns.
 
-## 3. The model performs internal reasoning
-The LLM:
-- interprets intent
-- follows agent instructions
-- decides if tools are needed
-- plans next actions
-Reasoning is pattern-based, not conscious.
+3. **Model interprets intent and context**  
+   The LLM understands the user's goal, constraints, prior messages,
+   and the agent's instructions based on training patterns.
 
-## 4. LLM decides the output type
-It produces one of the following:
-- **Direct answer**
-- **Tool/function call** (JSON or structured format)
-- **Next step in a multi-step agent plan**
+4. **LLM decides whether to answer or act**  
+   It determines whether it should respond directly, call a tool,
+   or produce the next step in a reasoning sequence.
 
-## 5. Agent executes the LLM's chosen action
-If a tool call is produced, the agent executes it and returns
-the result back to the model as new input.
+5. **LLM generates output token-by-token**  
+   The model predicts one token at a time, forming either a natural
+   language answer, a structured tool call, or an action plan.
 
-## 6. LLM refines its response
-Using the tool output, the model either:
-- produces the final answer, or
-- requests additional actions.
+6. **Agent receives and interprets the LLM output**  
+   The agent checks if the model produced a tool call, a plan, or a
+   final answer.
 
-## 7. Final output returned to the user
-Once the agent-LLM loop completes, the final response is sent
-to the end user.
+7. **Agent executes the required tool or action**  
+   When a tool call is requested, the agent runs the corresponding
+   function, API, or external operation.
 
+8. **Tool result is fed back to the LLM**  
+   The agent sends tool results back as new context or "observation"
+   for the model to continue reasoning.
 
+9. **LLM refines its response with the new data**  
+   The model may run more reasoning steps, call additional tools, or
+   finalize the answer based on updated context.
+
+10. **Agent ends the loop and returns the final output**  
+    Once the LLM provides a complete answer (not a tool call), the
+    agent delivers the final result to the end user.
