@@ -73,3 +73,43 @@
 8. **Enables coherent multi-step reasoning**
    Introspection helps maintain logical flow and continuity across
    long, complex interactions.
+
+
+# How an LLM Processes a Request — Agent Developer Perspective
+
+## 1. Agent builds a structured prompt
+The agent compiles system instructions, developer rules, memory,
+tool outputs, and the user's query into one text prompt.
+
+## 2. LLM tokenizes the input
+Text is converted into tokens so the model can process it
+through its attention layers.
+
+## 3. The model performs internal reasoning
+The LLM:
+- interprets intent
+- follows agent instructions
+- decides if tools are needed
+- plans next actions
+Reasoning is pattern-based, not conscious.
+
+## 4. LLM decides the output type
+It produces one of the following:
+- **Direct answer**
+- **Tool/function call** (JSON or structured format)
+- **Next step in a multi-step agent plan**
+
+## 5. Agent executes the LLM's chosen action
+If a tool call is produced, the agent executes it and returns
+the result back to the model as new input.
+
+## 6. LLM refines its response
+Using the tool output, the model either:
+- produces the final answer, or
+- requests additional actions.
+
+## 7. Final output returned to the user
+Once the agent-LLM loop completes, the final response is sent
+to the end user.
+
+
