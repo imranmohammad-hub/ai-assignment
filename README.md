@@ -134,7 +134,7 @@
 - Enables auditing for compliance when handling sensitive or regulated data.
 - Identifies workflow patterns, bottlenecks, and areas for optimization.
 - Detects anomalies, misuse, or unexpected agent actions, enhancing overall system safety.
-# Differentiate standard RAG and hierarchical RAG that were covered in the class
+# Differentiate standard RAG and hierarchical RAG that were covered in the class & When would you use each RAG?
 ## Traditional RAG:
 In traditional RAG, you create embeddings for chunks of your data (such as chat messages, documents, or paragraphs).
 When a question is asked, the system retrieves the most relevant chunks by comparing the query’s embedding with the stored embeddings, using similarity measures like the dot product.
@@ -147,4 +147,37 @@ Instead of relying solely on embeddings, it uses a tool-assisted, step-by-step r
 The agent first identifies the relevant section or chapter, then drills down into subsections or specific documents, reading and summarizing only the most relevant parts.
 This method avoids overwhelming the language model with irrelevant information and is especially effective when the data is organized in a hierarchy (e.g., books with chapters and sections).
 It mimics human information retrieval: first find the right book, then the right chapter, then the right page, rather than searching the entire library at once
+# Describe one limitation of each
+Traditional RAG is embedding-based, best for dynamic, unstructured, or chat-like data.
+Hierarchical RAG is tool-assisted, index-driven, and best for static, structured, or hierarchical data.
+The session emphasized that hierarchical RAG is not widely used or named in the industry, but it is a practical and intuitive approach for certain use cases
+# Write down the correct way to use Copilot 
+1. Avoid Overloading Copilot with Large Prompts
+Don’t dump all requirements or features into Copilot in a single prompt. This often leads to confusion and poor results.
+Instead, break down your requirements and provide clear, focused instructions for each step
+2. Specify Implementation Details
+Clearly specify the stack, technologies, and expected data structures (e.g., define what a “card” should contain).
+Don’t leave Copilot to invent specifications or guess your intent. Be explicit about what you want
+3. Use Spec-Driven or Plan-Driven Development
+First, define “what” you want (specifications), then move to “how” (implementation).
+Create intermediate documents or plans before asking Copilot to generate code, especially for complex features
+4. Limit Copilot’s Output Size
+Restrict Copilot to generate no more than 50 lines of code at a time.
+This makes it easier to review, understand, and debug the generated code, ensuring you remain in control
+5. Rapid Iteration and Instant Feedback
+Develop features in small increments, test immediately, and verify the behavior after each change.
+Don’t add multiple features at once; instead, build and test one feature at a time for faster debugging and better control
+6. Don’t Use Copilot for Trivial Changes
+For straightforward or minor changes, code them yourself instead of relying on Copilot. Save Copilot for non-trivial or repetitive tasks
+7. Checkpoint Frequently
+After each successful change or feature addition, commit your code (checkpoint) and, if possible, create a new branch.
+This allows you to track progress, revert to previous states, and maintain clean version control
+8. Own and Review Every Line
+Always read and understand every line Copilot generates before accepting it.
+Never blindly trust the output; ensure it aligns with your expectations and standards
+9. Refactor and Improve Incrementally
+Use Copilot to refactor or improve code in small steps, not in one go.
+If Copilot’s output is only partially correct, make manual adjustments or prompt it for specific improvements
+10. Maintain Control and Responsibility
+Remember, you are responsible for the codebase. Copilot is a tool to assist, not to replace your judgment or ownership of the code
 
