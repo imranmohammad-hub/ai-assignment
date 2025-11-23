@@ -126,3 +126,12 @@
 - Multi-step reasoning becomes possible as the LLM can call a tool, observe its result, and determine the next action logically.
 - Function calls add safety and control by ensuring the model can only perform approved, well-defined, and secure operations.
 
+# What is the purpose of logging in production agent systems?
+- Helps trace how the agent reached decisions, improving transparency and debuggability.
+- Captures tool calls, inputs, and outputs to quickly diagnose failures or unexpected behavior.
+- Provides visibility into reasoning steps to detect incorrect or unsafe actions.
+- Monitors performance metrics such as latency, error rates, and resource usage.
+- Enables auditing for compliance when handling sensitive or regulated data.
+- Identifies workflow patterns, bottlenecks, and areas for optimization.
+- Detects anomalies, misuse, or unexpected agent actions, enhancing overall system safety.
+
