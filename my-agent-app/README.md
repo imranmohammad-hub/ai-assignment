@@ -188,7 +188,7 @@ CONTEXT7_API_KEY=
 LOGFIRE_API_KEY=
 GOOGLE_APPLICATION_CREDENTIALS=/absolute/path/to/service-account.json
 ```
-# Agent App frontendUI.py README
+# Agent App frontendUI.py setup
 
 A small HTMX + FastHTML UI that talks to a Pydantic-AI conversational agent (`main.py`). The app renders a chat UI, processes special `CARD_ACTION` tags from the agent to add/remove product cards, and shows cards in a visual section.
 
@@ -298,5 +298,6 @@ If you don't set a key, `logfire.configure()` will still run; adapt if your depl
 * Improve agent prompts or add a validation step for chosen colors.
 
 ---
+
 
 
