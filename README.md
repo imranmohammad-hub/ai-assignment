@@ -134,4 +134,17 @@
 - Enables auditing for compliance when handling sensitive or regulated data.
 - Identifies workflow patterns, bottlenecks, and areas for optimization.
 - Detects anomalies, misuse, or unexpected agent actions, enhancing overall system safety.
+# Differentiate standard RAG and hierarchical RAG that were covered in the class
+## Traditional RAG:
+In traditional RAG, you create embeddings for chunks of your data (such as chat messages, documents, or paragraphs).
+When a question is asked, the system retrieves the most relevant chunks by comparing the query’s embedding with the stored embeddings, using similarity measures like the dot product.
+The retrieved chunks are then provided as context to the language model, which generates the answer.
+This approach is dynamic and works well for data that is constantly changing, like chat histories.
+The main challenge is chunking: if chunks are too large or not well-demarcated, irrelevant information may be included in the context, which can pollute the model’s input and degrade answer quality
+## Hierarchical RAG:
+Hierarchical RAG is more suitable for static, structured data (like books or technical documentation).
+Instead of relying solely on embeddings, it uses a tool-assisted, step-by-step retrieval process, similar to how humans use a table of contents or index.
+The agent first identifies the relevant section or chapter, then drills down into subsections or specific documents, reading and summarizing only the most relevant parts.
+This method avoids overwhelming the language model with irrelevant information and is especially effective when the data is organized in a hierarchy (e.g., books with chapters and sections).
+It mimics human information retrieval: first find the right book, then the right chapter, then the right page, rather than searching the entire library at once
 
