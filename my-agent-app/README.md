@@ -188,3 +188,114 @@ CONTEXT7_API_KEY=
 LOGFIRE_API_KEY=
 GOOGLE_APPLICATION_CREDENTIALS=/absolute/path/to/service-account.json
 ```
+# Agent App — README
+
+A small HTMX + FastHTML UI that talks to a Pydantic-AI conversational agent (`main.py`). The app renders a chat UI, processes special `CARD_ACTION` tags from the agent to add/remove product cards, and shows cards in a visual section.
+
+This repository contains two primary files you provided:
+
+* `main.py` — UI server using `fasthtml` (routes, HTMX endpoints, client JS) and the agent client.
+* `main.py` (agent code referenced/imported) — the agent and tool implementations (model, tools, and helpers).
+
+> Note: both pieces live in the same runtime in your example and communicate via the `agent.run(...)` calls.
+
+---
+
+## Quick start
+
+1. Install dependencies (no virtualenv):
+
+```bash
+python -m pip install --user pydantic-ai logfire python-dotenv requests pytz fasthtml
+```
+
+2. Create a minimal `.env` in the project folder with the values you use. Example:
+
+```
+CONTEXT7_API_KEY=xyz12345apikey
+CONTEXT7_MCP_URL=http://localhost:3000
+GOOGLE_API_KEY=AIzaSyCEHZsmWmQO8iXcBXDscXr3XIfCqyxoyf0
+```
+
+3. Start the app:
+
+```bash
+python main.py
+```
+
+The server listens on port `8000` by default (as in your code). Open `http://localhost:8000` in a browser.
+
+---
+
+## Features
+
+* Console/HTMX chat UI for interacting with the agent.
+* Special tag parsing for product card management with exact `CARD_ACTION` format.
+* In-memory card store (`all_cards`) using a Pydantic `Card` model.
+* Tailwind-based card visuals generated from agent-suggested Tailwind `bg-*` classes.
+* Basic Logfire instrumentation (`logfire.configure()` / `logfire.instrument_pydantic_ai()`).
+
+---
+
+## Card action tag format
+
+The UI parses the first `CARD_ACTION` tag it finds in agent output (case-insensitive). The exact format you must keep is:
+
+```
+[CARD_ACTION:ADD|TITLE:Product Name|QUANTITY:3]
+[CARD_ACTION:REMOVE|TITLE:Product Name|QUANTITY:ALL]
+```
+
+Important points:
+
+* The tag must appear on the first line for predictable parsing.
+* `QUANTITY` can be `ALL` or a number; default behavior is `1` if parsing fails.
+* Product names will be used as dictionary keys; prefer Title Case to keep them readable.
+
+---
+
+## Endpoints
+
+* `GET /` — Main UI page (chat + cards)
+* `POST /echo` — HTMX endpoint that accepts `msg` (user message), forwards it to the agent, updates message history, and applies `CARD_ACTION` updates out-of-band to the `#card-zone`.
+
+---
+
+## Logging (Logfire)
+
+You indicated Logfire should be enabled from the command line. Set the `LOGFIRE_API_KEY` environment variable before starting the app:
+
+**Linux/macOS**
+
+```bash
+export LOGFIRE_API_KEY=your_logfire_key
+python main.py
+```
+
+**Windows (PowerShell)**
+
+```powershell
+$env:LOGFIRE_API_KEY="your_logfire_key"
+python main.py
+```
+
+If you don't set a key, `logfire.configure()` will still run; adapt if your deployment needs explicit configuration.
+
+---
+
+## Security & notes
+
+* User input and agent output are HTML-escaped before rendering, to reduce XSS risk.
+* The app keeps cards in memory (`all_cards`) — restart the server to reset data. For persistence, replace with a database.
+* The agent is asked to return raw Tailwind classes for colors; validate or whitelist classes in production.
+
+---
+
+## Extending
+
+* Persist cards to a database (SQLite/Postgres) instead of in-memory dict.
+* Add authentication and permissions for multi-user support.
+* Improve agent prompts or add a validation step for chosen colors.
+
+---
+
