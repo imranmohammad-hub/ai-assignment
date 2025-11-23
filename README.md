@@ -1,4 +1,4 @@
-# Agent vs Chatbot — Functional Difference
+# Agent vs Chatbot  Functional Difference
 
 | Feature / Aspect         | Chatbot                                          | Agent                                                       |
 |---------------------------|--------------------------------------------------|-------------------------------------------------------------|
