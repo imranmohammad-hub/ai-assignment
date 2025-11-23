@@ -116,3 +116,13 @@
 10. **Agent ends the loop and returns the final output**  
     Once the LLM provides a complete answer (not a tool call), the
     agent delivers the final result to the end user.
+
+# Explain the role of tools/function calls in extending LLM capability
+
+- Tools let LLMs access real-time external data such as APIs and databases, overcoming the limitations of static training.
+- Function calls allow LLMs to take real actions like creating files, sending emails, or triggering workflows instead of only generating text.
+- Deterministic operations like calculations, parsing, and validations are handled by tools, reducing hallucinations and improving accuracy.
+- Tools connect LLMs to private systems, custom logic, and enterprise data, extending capabilities beyond what the model was trained on.
+- Multi-step reasoning becomes possible as the LLM can call a tool, observe its result, and determine the next action logically.
+- Function calls add safety and control by ensuring the model can only perform approved, well-defined, and secure operations.
+
