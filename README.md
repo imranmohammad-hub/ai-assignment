@@ -37,3 +37,39 @@
 
 8. **Tasks needing exact accuracy**  
    Cannot rely on approximate or probabilistic AI reasoning.
+
+# State Awareness in LLMs via Introspection
+
+
+1. **Rebuilds state from context**
+   LLMs do not store memory; they reconstruct conversational state
+   from the provided tokens each time.
+
+2. **Evaluates what it already knows**
+   Through introspection, the model infers which details are known
+   and which are missing based on context.
+
+3. **Identifies gaps or missing information**
+   The model detects when the user hasn't provided enough data and
+   prompts for clarification.
+
+4. **Checks for contradictions**
+   LLMs compare current reasoning with earlier responses to avoid
+   inconsistencies in multi-turn conversations.
+
+5. **Estimates uncertainty in responses**
+   The model infers when its answer might be unreliable and adjusts
+   output accordingly.
+
+6. **Introspection learned, not true awareness**
+   This self-evaluation ability comes from training patterns, not
+   real memory, consciousness, or emotions.
+
+7. **Enhanced by agent memory systems**
+   External memory in agent frameworks stores goals, steps, and
+   results, creating stronger state awareness beyond the context
+   window.
+
+8. **Enables coherent multi-step reasoning**
+   Introspection helps maintain logical flow and continuity across
+   long, complex interactions.
